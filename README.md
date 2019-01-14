@@ -1,4 +1,4 @@
-# ![React + Redux Example App](project-logo.png)
+<!-- # ![React + Redux Example App](project-logo.png)
 
 > Example React + Redux codebase that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
@@ -51,7 +51,7 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 - Profile page (URL: /#/@username, /#/@username/favorites )
     - Show basic user info
     - List of articles populated from author's created articles or author's favorited articles
-
+ -->
 
 <!--
 
