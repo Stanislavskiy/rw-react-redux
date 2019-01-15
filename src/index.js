@@ -17,7 +17,14 @@ const reducer = (state, action) => {
   return state;
 };
 
-const store = createStore(reducer, defaultState);
+/* eslint-disable */
+const store = createStore(
+    reducer,
+    defaultState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
+
 
 /*-----------------------------
   APP
