@@ -12,7 +12,7 @@ const ArticleList = props => {
   return (
     <div>
       {props.articles.map(article => {
-        return <h2>{article.title}</h2>;
+        return <h2 key={article.slug}>{article.title}</h2>;
       })}
     </div>
   );
