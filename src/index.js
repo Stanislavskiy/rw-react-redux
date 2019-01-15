@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { createStore } from "redux";
 import { Provider } from 'react-redux';
-import App from './components/App';
+import App from './components/App'; 
 
 /*-----------------------------
   REDUX
@@ -14,6 +14,15 @@ const defaultState = {
 };
 
 const reducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_ARTICLES': {
+      return {
+        ...state,
+        articles: action.payload
+      }
+    }
+  }
+  
   return state;
 };
 
