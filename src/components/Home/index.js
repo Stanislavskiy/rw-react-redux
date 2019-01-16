@@ -1,5 +1,5 @@
-import Banner from "../Banner";
-import MainView from "../MainView";
+import Banner from "./Banner";
+import MainView from "./MainView";
 import React from "react";
 import { connect } from "react-redux";
 import { getArticles } from "../../api";

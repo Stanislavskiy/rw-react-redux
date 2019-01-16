@@ -1,4 +1,4 @@
-import ArticlePreview from '../ArticlePreview';
+import ArticlePreview from './ArticlePreview';
 import React from "react";
 
 const ArticleList = props => {
