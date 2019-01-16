@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 const mapStateToProps = state => ({
-  appName: state.appName
+  appName: state.app.name
 })
 
 class App extends React.Component {

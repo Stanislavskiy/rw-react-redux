@@ -1,22 +1,12 @@
-import { createStore } from "redux";
-import { 
-  UPDATE_ARTICLES,
- } from "./actionTypes";
+import thunkMiddleware from "redux-thunk";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { appReducer } from "./modules/app";
+import { articlesReducer } from "./modules/articles";
 
-const initialState = {
-  appName: "conduit",
-  articles: null
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case UPDATE_ARTICLES:
-      return {
-        ...state,
-        articles: action.payload
-      };
-    }
-  }
+const reducer = combineReducers({
+  app: appReducer,
+  articles: articlesReducer,
+});
 
   return state;
 };
@@ -24,8 +14,9 @@ const reducer = (state, action) => {
 /* eslint-disable */
 const store = createStore(
   reducer,
-  initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  applyMiddleware(
+    thunkMiddleware,
+  ),
 );
 /* eslint-enable */
 

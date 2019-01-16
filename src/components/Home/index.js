@@ -2,22 +2,19 @@ import Banner from "./Banner";
 import MainView from "./MainView";
 import React from "react";
 import { connect } from "react-redux";
-import { getArticles } from "../../api";
-import { UPDATE_ARTICLES } from "../../store/actionTypes";
+import { loadArticles } from "../../store/modules/articles";
 
 const mapStateToProps = state => ({
-  appName: state.appName
+  appName: state.app.name
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: UPDATE_ARTICLES, payload })
+  onLoad: () => dispatch(loadArticles())
 });
 
 class Home extends React.Component {
   componentWillMount() {
-    getArticles().then(data => {
-      this.props.onLoad(data);
-    });
+    this.props.onLoad();
   }
 
   render() {
