@@ -8,6 +8,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "history": "^4.3.0",
+    "lodash": "^4.17.11",
     "marked": "^0.3.6",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
