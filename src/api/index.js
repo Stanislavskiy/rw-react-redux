@@ -1,5 +1,22 @@
-import axios from 'axios';
-import urls from './endpoints';
+import axios from "axios";
+import { endpointSet } from "./utils";
+
+/*------------------------------
+  Endpoints
+--------------------------------*/
+
+const urls = endpointSet({
+  root_url: "https://conduit.productionready.io/api",
+  endpoints: {
+    articles: `/articles?limit=10`,
+    user: `/user`,
+    login: `/users/login`
+  }
+});
+
+/*------------------------------
+  API methods
+--------------------------------*/
 
 export function getArticles() {
   return axios
@@ -12,4 +29,26 @@ export function getArticles() {
 
       return [];
     });
+}
+
+export function getUser() {
+  return axios
+    .get(urls.user)
+    .then(response => {
+      return response.data.user;
+    })
+    .catch(error => {
+      console.error(error);
+
+      return [];
+    });
+}
+
+export function authenticate({email, password}) {
+  axios.post(urls.auth, {
+    auth: {
+      email: email,
+      password: password
+    }
+  })
 }
