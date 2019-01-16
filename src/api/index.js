@@ -1,5 +1,5 @@
 import axios from 'axios';
-import urls from 'endpoints';
+import urls from './endpoints';
 
 export function getArticles() {
   return axios
