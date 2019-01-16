@@ -1,4 +1,7 @@
 import { createStore } from "redux";
+import { 
+  UPDATE_ARTICLES,
+ } from "./actionTypes";
 
 const initialState = {
   appName: "conduit",
@@ -7,7 +10,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "UPDATE_ARTICLES": {
+    case UPDATE_ARTICLES:
       return {
         ...state,
         articles: action.payload

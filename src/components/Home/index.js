@@ -3,13 +3,14 @@ import MainView from "./MainView";
 import React from "react";
 import { connect } from "react-redux";
 import { getArticles } from "../../api";
+import { UPDATE_ARTICLES } from "../../store/actionTypes";
 
 const mapStateToProps = state => ({
   appName: state.appName
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "UPDATE_ARTICLES", payload })
+  onLoad: payload => dispatch({ type: UPDATE_ARTICLES, payload })
 });
 
 class Home extends React.Component {
