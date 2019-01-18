@@ -1,8 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
+import { login, updateForm, unload } from "../../store/modules/auth";
+import loadingSVG from "../../assets/svg/loading.svg";
+import "./style.css";
+import ListErrors from "../ListErrors";
+
+const mapStateToProps = state => ({
+  ...state.auth
+});
+
+const mapDispatchToProps = dispatch => ({
+  onLogin: credentials => dispatch(login(credentials)),
+  onUpdateForm: (key, value) => dispatch(updateForm(key, value)),
+  onUnload: () => dispatch(unload())
+});
 
 class Login extends React.Component {
+  constructor() {
+    super();
+    this.updateEmail = e => this.props.onUpdateForm("email", e.target.value);
+    this.updatePassword = e =>
+      this.props.onUpdateForm("password", e.target.value);
+    this.submitForm = (email, password) => e => {
+      e.preventDefault();
+      this.props.onLogin({ email, password });
+    };
+  }
+  componentWillUnmount() {
+    this.props.onUnload();
+  }
+
   render() {
+    const { email, password, isAuthenticating, errors } = this.props;
+
     return (
       <div className="auth-page">
         <div className="container page">
@@ -12,13 +42,16 @@ class Login extends React.Component {
               <p className="text-xs-center">
                 <a>Need an account?</a>
               </p>
-              <form>
+              <ListErrors errors={errors} />
+              <form onSubmit={this.submitForm(email, password)}>
                 <fieldset>
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
                       type="email"
                       placeholder="Email"
+                      value={email}
+                      onChange={this.updateEmail}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -26,14 +59,16 @@ class Login extends React.Component {
                       className="form-control form-control-lg"
                       type="password"
                       placeholder="Password"
+                      value={password}
+                      onChange={this.updatePassword}
                     />
                   </fieldset>
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                  >
-                    Sign in
-                  </button>
+                  <div className="pull-xs-right">
+                    {isAuthenticating ? <img className="loading" src={loadingSVG} alt="loading" /> : ''}
+                    <button className="btn btn-lg btn-primary" type="submit">
+                      Sign in
+                    </button>
+                  </div>
                 </fieldset>
               </form>
             </div>
@@ -45,8 +80,8 @@ class Login extends React.Component {
 }
 
 Login = connect(
-  () => ({}),
-  () => ({})
+  mapStateToProps,
+  mapDispatchToProps
 )(Login);
 
-export default Login 
+export default Login;
