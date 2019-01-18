@@ -3,14 +3,13 @@ import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { appReducer } from "./modules/app";
 import { articlesReducer } from "./modules/articles";
+import { authReducer } from "./modules/auth";
 
 const reducer = combineReducers({
   app: appReducer,
   articles: articlesReducer,
+  auth: authReducer
 });
-
-  return state;
-};
 
 /* eslint-disable */
 const store = createStore(
