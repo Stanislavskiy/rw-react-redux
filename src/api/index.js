@@ -10,7 +10,8 @@ const urls = endpointSet({
   endpoints: {
     articles: `/articles?limit=10`,
     user: `/user`,
-    login: `/users/login`
+    login: `/users/login`,
+    register: `/users`
   }
 });
 
@@ -44,11 +45,16 @@ export function getUser() {
     });
 }
 
-export function authenticate({email, password}) {
-  axios.post(urls.auth, {
-    auth: {
-      email: email,
-      password: password
-    }
-  })
+export function authenticate({ email, password }) {
+  return axios.post(
+    urls.login,
+    {user: {email, password}}
+  );
+}
+
+export function register({ username, email, password }) {
+  return axios.post(
+    urls.register,
+    { user: { username, email, password }}
+  );
 }
