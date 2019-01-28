@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { login, updateForm, unload } from "../../store/modules/auth";
+import { login, updateForm, loginUnload } from "../../store/modules/auth";
 import loadingSVG from "../../assets/svg/loading.svg";
 import "./style.css";
 import ListErrors from "../ListErrors";
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLogin: credentials => dispatch(login(credentials)),
   onUpdateForm: (key, value) => dispatch(updateForm(key, value)),
-  onUnload: () => dispatch(unload())
+  onUnload: () => dispatch(loginUnload())
 });
 
 class Login extends React.Component {
@@ -31,7 +31,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, isAuthenticating, errors } = this.props;
+    const { email, password, inProgress, errors } = this.props;
 
     return (
       <div className="auth-page">
@@ -64,7 +64,7 @@ class Login extends React.Component {
                     />
                   </fieldset>
                   <div className="pull-xs-right">
-                    {isAuthenticating ? <img className="loading" src={loadingSVG} alt="loading" /> : ''}
+                    {inProgress ? <img className="loading" src={loadingSVG} alt="loading" /> : ''}
                     <button className="btn btn-lg btn-primary" type="submit">
                       Sign in
                     </button>

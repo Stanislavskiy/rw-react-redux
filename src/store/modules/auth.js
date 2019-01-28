@@ -13,7 +13,7 @@ const AUTH_UNLOAD = "AUTH_UNLOAD";
 // INITIAL STATE
 
 const initialState = {
-  isAuthenticating: false,
+  inProgress: false,
   currentUser: null,
   errors: null,
   email: "",
@@ -27,18 +27,18 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_LOGIN_REQUEST:
       return {
         ...state,
-        isAuthenticating: true
+        inProgress: true
       };
     case AUTH_LOGIN_FAILURE:
       return {
         ...state,
-        isAuthenticating: false,
+        inProgress: false,
         errors: action.errors
       };
     case AUTH_LOGIN_SUCCESS:
       return {
         ...state,
-        isAuthenticating: false,
+        inProgress: false,
         currentUser: action.user,
         errors: null
       };
@@ -47,7 +47,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         [action.key]: action.value
       };
-    case AUTH_UNLOAD:
+    case AUTH_LOGIN_UNLOAD:
       return {
         ...state,
         errors: null,
@@ -57,7 +57,7 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_LOGOUT:
       return {
         ...state,
-        isAuthenticating: false,
+        inProgress: false,
         currentUser: null,
         errors: null
       };
@@ -105,7 +105,11 @@ export function updateForm(key, value) {
   };
 }
 
-export function unload() {
+export function loginUnload() {
+  return {
+    type: AUTH_LOGIN_UNLOAD
+  };
+}
   return {
     type: AUTH_UNLOAD
   };
