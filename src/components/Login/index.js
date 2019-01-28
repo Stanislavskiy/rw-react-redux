@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router";
 import { connect } from "react-redux";
 import { login, updateForm, loginUnload } from "../../store/modules/auth";
-import loadingSVG from "../../assets/svg/loading.svg";
-import "./style.css";
 import ListErrors from "../ListErrors";
+import Spinner from "../Spinner";
 
 const mapStateToProps = state => ({
   ...state.auth
@@ -32,7 +32,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, inProgress, errors } = this.props;
-
+    
     return (
       <div className="auth-page">
         <div className="container page">
@@ -40,7 +40,9 @@ class Login extends React.Component {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
-                <a>Need an account?</a>
+                <Link to="register">
+                  Sign up
+                </Link>
               </p>
               <ListErrors errors={errors} />
               <form onSubmit={this.submitForm(email, password)}>
@@ -64,8 +66,13 @@ class Login extends React.Component {
                     />
                   </fieldset>
                   <div className="pull-xs-right">
-                    {inProgress ? <img className="loading" src={loadingSVG} alt="loading" /> : ''}
-                    <button className="btn btn-lg btn-primary" type="submit">
+                    <Spinner isActive={inProgress} />
+                    
+                    <button 
+                      className="btn btn-lg btn-primary"
+                      type="submit"
+                      disabled={inProgress}
+                    >
                       Sign in
                     </button>
                   </div>
